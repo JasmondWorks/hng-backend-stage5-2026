@@ -51,7 +51,7 @@ from app.services.auth import (
     set_oauth_state_cookie,
     set_refresh_token_cookie,
 )
-from app.services.email import send_password_reset_email, send_verification_email
+from app.services.gmail_email import send_password_reset_email, send_verification_email
 
 router = APIRouter()
 _GITHUB_AUTHORIZE_URL = "https://github.com/login/oauth/authorize"

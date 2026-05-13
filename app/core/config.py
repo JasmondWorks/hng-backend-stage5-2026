@@ -16,8 +16,8 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
 
     DATABASE_URL: PostgresDsn
-
     JWT_SECRET: str
+
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_TTL_MINUTES: int = 60
     VERIFICATION_TOKEN_TTL_HOURS: int = 24
@@ -43,9 +43,26 @@ class Settings(BaseSettings):
 
     PASSWORD_RESET_TOKEN_TTL_MINUTES: int = 60
 
-    BREVO_API_KEY: str
+    # OpenRouter (LLM gateway)
+    OPENROUTER_API_KEY: str = ""
+    OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
+    OPENROUTER_MODEL: str = "openai/gpt-4o-mini"
+
+    # Resend (transactional email)
+    RESEND_API_KEY: str = ""
+    RESEND_FROM_EMAIL: str = "onboarding@resend.dev"
+
+    # Brevo (transactional email — legacy)
+    BREVO_API_KEY: str = ""
     SMTP_FROM_NAME: str = "Agent Forge"
-    SMTP_FROM_EMAIL: str
+    SMTP_FROM_EMAIL: str = ""
+
+    # Gmail SMTP
+    EMAIL_HOST: str = "smtp.gmail.com"
+    EMAIL_PORT: int = 587
+    EMAIL_USER: str = ""
+    EMAIL_PASS: str = ""
+    EMAIL_FROM: str = ""
 
 
 @lru_cache

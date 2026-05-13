@@ -1,0 +1,68 @@
+services:
+  - type: web
+    name: agentforge-be
+    runtime: python
+    region: oregon
+    plan: free
+    branch: jasmond/stage5
+
+    buildCommand: pip install uv && uv sync --no-dev
+    preDeployCommand: uv run alembic upgrade heads
+    startCommand: uv run uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /api/v1/health
+
+    envVars:
+      # ── Core ──────────────────────────────────────────────────────────────
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: TRUSTED_PROXIES
+        value: ""
+      - key: FRONTEND_URL
+        sync: false
+
+      # ── LLM (OpenRouter) ──────────────────────────────────────────────────
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENROUTER_BASE_URL
+        value: "https://openrouter.ai/api/v1"
+      - key: OPENROUTER_MODEL
+        value: "openai/gpt-4o-mini"
+
+      # ── Email — Resend (active) ────────────────────────────────────────────
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
+
+      # ── Email — Gmail SMTP (fallback) ─────────────────────────────────────
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: SMTP_FROM_NAME
+        value: "Agent Forge"
+      - key: SMTP_FROM_EMAIL
+        sync: false
+
+      # ── OAuth — Google ────────────────────────────────────────────────────
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+
+      # ── OAuth — GitHub ────────────────────────────────────────────────────
+      - key: GITHUB_CLIENT_ID
+        sync: false
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+      - key: GITHUB_REDIRECT_URI
+        sync: false

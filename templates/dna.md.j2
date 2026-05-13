@@ -1,0 +1,31 @@
+# DNA — {{ name }}
+
+## Core Capabilities
+
+{{ content }}
+
+## Skill Genome
+
+The following skills form the functional DNA of this agent. Each skill is a discrete,
+composable capability that can be invoked independently or chained.
+
+{% for skill in skills %}
+### {{ skill.name }}
+{{ skill.description }}
+
+{% else %}
+No skills have been matched for this agent. Install skills to unlock capabilities.
+{% endfor %}
+
+## Execution Model
+
+1. **Receive** — accept a structured task from the caller.
+2. **Plan** — decompose the task into skill-sized sub-tasks.
+3. **Execute** — invoke matching skills in dependency order.
+4. **Validate** — verify each output before passing it downstream.
+5. **Return** — deliver a structured response.
+
+## Category: {{ category }}
+
+All capabilities are scoped to the **{{ category }}** domain.
+Cross-domain operations require explicit skill extensions.
