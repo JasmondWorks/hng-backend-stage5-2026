@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv sync *)",
+      "PowerShell(Get-Command uv -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command python -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.local\\\\bin\\\\uv.exe\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:USERPROFILE\\\\.cargo\\\\bin\\\\uv.exe\" -ErrorAction SilentlyContinue; where.exe uv 2>$null)",
+      "PowerShell($env:DATABASE_URL)"
+    ]
+  }
+}

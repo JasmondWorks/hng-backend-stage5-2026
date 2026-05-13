@@ -3,6 +3,8 @@ from app.models.user import User
 from app.models.refresh_token import RefreshToken
 from app.models.agent import Agent
 from app.models.agent_skill import AgentSkill
+from app.models.agent_file import AgentFile
+from app.models.agent_clarification import AgentClarification
 from app.models.skill import Skill
 
 __all__ = [
@@ -10,6 +12,8 @@ __all__ = [
     "BaseModel",
     "User",
     "Agent",
+    "AgentFile",
+    "AgentClarification",
     "Skill",
     "AgentSkill",
     "RefreshToken",

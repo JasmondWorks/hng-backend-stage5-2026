@@ -9,14 +9,6 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 
-# def send_verification_email(_to_email: str, _token: str) -> None:
-#     """
-#     Stub: in production, dispatch a real email via your provider.
-#     Keep token delivery behind this boundary so endpoints never log secrets.
-#     """
-#     logger.info("Verification email queued")
-
-
 def _build_verification_email(email: str, verification_url: str) -> tuple[str, str]:
     """Return (plain-text body, html body) for the verification email."""
     plain = (
@@ -191,7 +183,7 @@ def send_verification_email(email: str, token: str) -> None:
 
     try:
         api_instance.send_transac_email(send_smtp_email)
-        logger.info("Verification email sent to %s via Brevo", email)
+        logger.info("Verification email queued")
     except ApiException:
         logger.exception("Failed to send verification email to %s", email)
         raise

@@ -1,0 +1,29 @@
+# Heartbeat — {{ name }}
+
+## Continuous Behaviours
+
+{{ content }}
+
+## Background Monitoring
+
+The following behaviours run as background tasks during the agent's active lifetime:
+
+| Behaviour | Frequency | Purpose |
+|-----------|-----------|---------|
+| Health self-check | Every 60 s | Verify all skills are responsive |
+| Context refresh | Every 5 min | Re-read any dynamic configuration |
+| Error log flush | Every 10 min | Persist accumulated error telemetry |
+| Idle timeout check | Every 30 min | Release resources if no active tasks |
+
+## Lifecycle Events
+
+- **on_start**: Initialise skill registry, verify API keys, log readiness.
+- **on_task_received**: Validate input schema, assign task ID, begin execution timer.
+- **on_task_complete**: Log outcome, update metrics, release resources.
+- **on_error**: Capture stack trace, attempt graceful recovery, escalate if unrecoverable.
+- **on_shutdown**: Drain pending tasks, persist state, close connections cleanly.
+
+## Category: {{ category }}
+
+Heartbeat intervals and lifecycle hooks are tuned for **{{ category }}** workloads.
+Adjust `heartbeat.interval_seconds` in agent config to override defaults.
